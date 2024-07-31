@@ -1,0 +1,72 @@
+spring:
+  data:
+    #Redis配置
+    redis:
+      host: 192.168.1.61
+      #Redis服务器连接端口
+      port: 6379
+      #Redis服务器连接密码（默认为空）
+      password:
+
+      lettuce:
+        pool:
+          #连接池最大连接数（使用负值表示没有限制）
+          max-active: 8
+          #连接池最大阻塞等待时间（使用负值表示没有限制）
+          max-wait: -1
+          #连接池中的最大空闲连接
+          max-idle: 8
+          #连接池中的最小空闲连接
+          min-idle: 0
+
+
+      #连接超时时间（毫秒）
+      timeout: 30000
+
+  datasource:
+    # 数据库驱动完整类名
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # 数据库连接url
+    url: jdbc:mysql://192.168.1.61:3306/seckill?useUnicode=true&characterEncoding=UTF-8
+    # 数据库用户名
+    username: root
+    # 数据库密码
+    password: root
+    hikari:
+      connection-timeout: 30000       # 连接超时时间（毫秒）
+      idle-timeout: 600000            # 连接空闲生命周期（毫秒）
+      max-lifetime: 1800000           # 连接最大生命周期（毫秒）
+      maximum-pool-size: 10           # 连接池中最大连接数
+      minimum-idle: 5                 # 连接池中最小闲置连接数
+      pool-name: Seckill-Act-Pool     # 连接池名称
+      auto-commit: true               # 自动提交从池中返回的连接
+
+
+logging:
+  level:
+    org.springframework.jdbc.core.JdbcTemplate: debug
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+
+distributed:
+  # 分布式缓存
+  cache:
+    type: redis
+  # 分布式锁
+  lock:
+    type: redisson
+
+redis:
+  deploy:
+    type: single
+
+local:
+  # 本地缓存
+  cache:
+    type: guava
+
+
+snow-flake:
+  dataCenterId: 10
+  machineId: 10

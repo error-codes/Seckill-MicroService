@@ -1,0 +1,19 @@
+server:
+  port: 8084
+
+  tomcat:
+    accept-count: 6000
+    threads:
+      max: 800
+      min-spare: 100
+    accesslog:
+      enabled: true
+      directory: "./tomcat"
+      pattern: "%h %1 %u '%r' %s %b %D"
+
+spring:
+  application:
+    name: seckill-user
+
+  profiles:
+    include: data

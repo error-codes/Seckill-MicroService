@@ -1,0 +1,42 @@
+databaseName: seckill_stock_bucket
+
+dataSources:
+  ds_0:
+    dataSourceClassName: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    jdbcUrl: jdbc:mysql://192.168.1.61:3306/seckill_stock_0?useUnicode=true&characterEncoding=UTF-8&connectTimeout=2000&socketTimeout=5000
+    username: root
+    password: root
+  ds_1:
+    dataSourceClassName: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    jdbcUrl: jdbc:mysql://192.168.1.61:3306/seckill_stock_1?useUnicode=true&characterEncoding=UTF-8&connectTimeout=2000&socketTimeout=5000
+    username: root
+    password: root
+
+rules:
+  - !SHARDING
+    tables:
+      seckill_stock_bucket:
+        actualDataNodes: ds_${0..1}.seckill_stock_bucket_${0..2}
+        tableStrategy:
+          standard:
+            shardingColumn: goods_id
+            shardingAlgorithmName: table-inline
+        databaseStrategy:
+          standard:
+            shardingColumn: goods_id
+            shardingAlgorithmName: database-inline
+    shardingAlgorithms:
+      database-inline:
+        type: INLINE
+        props:
+          algorithm-expression: ds_$->{goods_id % 2}
+
+      table-inline:
+        type: INLINE
+        props:
+          algorithm-expression: seckill_stock_bucket_${goods_id % 3}
+
+props:
+  sql-show: true

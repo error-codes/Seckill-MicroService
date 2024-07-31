@@ -1,0 +1,83 @@
+spring:
+  data:
+    #Redis配置
+    redis:
+      host: 192.168.1.61
+      #Redis服务器连接端口
+      port: 6379
+      #Redis服务器连接密码（默认为空）
+      password:
+
+      lettuce:
+        pool:
+          #连接池最大连接数（使用负值表示没有限制）
+          max-active: 8
+          #连接池最大阻塞等待时间（使用负值表示没有限制）
+          max-wait: -1
+          #连接池中的最大空闲连接
+          max-idle: 8
+          #连接池中的最小空闲连接
+          min-idle: 0
+
+
+      #连接超时时间（毫秒）
+      timeout: 30000
+
+  datasource:
+    driver-class-name: org.apache.shardingsphere.driver.ShardingSphereDriver
+    url: jdbc:shardingsphere:classpath:stock.yaml
+
+
+
+
+logging:
+  level:
+    org.springframework.jdbc.core.JdbcTemplate: debug
+
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+
+
+# 分布式订单处理
+order:
+  place-type: lua
+
+
+distributed:
+  # 分布式缓存
+  cache:
+    type: redis
+  # 分布式锁
+  lock:
+    type: redisson
+
+
+redis:
+  deploy:
+    type: single
+
+
+event:
+  publish:
+    type: rocketmq
+
+
+submit:
+  order:
+    type: async
+
+
+message:
+  send:
+    type: rocketmq
+
+local:
+  # 本地缓存
+  cache:
+    type: guava
+
+
+snow-flake:
+  dataCenterId: 10
+  machineId: 10

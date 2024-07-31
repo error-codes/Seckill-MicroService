@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.young.seckill</groupId>
+    <artifactId>Seckill-MicroService</artifactId>
+    <version>${revision}</version>
+    <packaging>pom</packaging>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+            <version>3.1.2</version>
+    </parent>
+
+    <modules>
+        <module>seckill-activity</module>
+        <module>seckill-common</module>
+        <module>seckill-dubbo-interfaces</module>
+        <module>seckill-goods</module>
+        <module>seckill-order</module>
+        <module>seckill-user</module>
+        <module>seckill-message</module>
+        <module>seckill-stock</module>
+    </modules>
+
+    <properties>
+        <revision>1.0.1</revision>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <spring-boot.version>3.1.2</spring-boot.version>
+        <mybatis.version>3.0.3</mybatis.version>
+        <jjwt.version>0.12.3</jjwt.version>
+        <lombok.version>1.18.30</lombok.version>
+        <knife4j.version>3.0.3</knife4j.version>
+        <redisson.version>3.23.5</redisson.version>
+        <guava.version>31.1-jre</guava.version>
+        <rocketmq.version>2.3.0</rocketmq.version>
+        <hibernate.version>8.0.1.Final</hibernate.version>
+        <dubbo3.version>3.2.12</dubbo3.version>
+        <guava.version>32.0.1-jre</guava.version>
+        <seata.version>2.0.0</seata.version>
+        <shardingsphere.version>5.5.0</shardingsphere.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+
+            <!-- dubbo -->
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-spring-boot-starter</artifactId>
+                <version>${dubbo3.version}</version>
+            </dependency>
+
+            <!-- nacos作注册中心-->
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-registry-nacos</artifactId>
+                <version>${dubbo3.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>
